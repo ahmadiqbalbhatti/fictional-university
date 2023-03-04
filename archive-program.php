@@ -1,30 +1,10 @@
 <?php
 get_header();
-
+@pageBanner( array(
+	'title'    => 'All Programs',
+	'subtitle' => 'There is something for everyone. Have a look around.',
+) );
 ?>
-
-    <div class="page-banner">
-        <div class="page-banner__bg-image" style="background-image: url(<?php echo
-		get_theme_file_uri( '/images/ocean.jpg' ) ?>)
-                "></div>
-        <div class="page-banner__content container container--narrow">
-            <h1 class="page-banner__title">
-                <!--				--><?php
-				//				//				if ( is_category() ) {
-				//				//					single_cat_title();
-				//				//				} else if (is_author()){
-				//				//                   echo "Post by "; the_author();
-				//				//                }
-				//				the_archive_title();
-				//
-				//				?>
-                All Programs
-            </h1>
-            <div class="page-banner__intro">
-                <p>There is something for everyone. Have a look around.</p>
-            </div>
-        </div>
-    </div>
 
     <div class="container container--narrow page-section">
 

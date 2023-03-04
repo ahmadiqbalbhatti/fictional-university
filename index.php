@@ -1,20 +1,10 @@
 <?php
 get_header();
-
+@pageBanner( array(
+	'title'    => 'Welcome to Our Blog!',
+	'subtitle' => 'Keep up with our latest news',
+) );
 ?>
-
-    <div class="page-banner">
-        <div class="page-banner__bg-image" style="background-image: url(<?php echo
-		get_theme_file_uri( '/images/ocean.jpg' ) ?>)
-                "></div>
-        <div class="page-banner__content container container--narrow">
-            <h1 class="page-banner__title">Welcome to Our Blog!</h1>
-            <div class="page-banner__intro">
-                <p>Keep up with our latest news</p>
-            </div>
-        </div>
-    </div>
-
     <div class="container container--narrow page-section">
 
 		<?php
@@ -22,16 +12,18 @@ get_header();
 			the_post(); ?>
 
             <div class="post-item">
-                <h2 class="headline headline--medium headline--post-title"><a href="<?php the_permalink();
-                ?>"><?php the_title();
-                ?></a></h2>
+                <h2 class="headline headline--medium headline--post-title"><a
+                            href="<?php the_permalink();
+							?>"><?php the_title();
+						?></a></h2>
                 <div class="metabox">
-                    <p>Posted by <?php the_author_posts_link(); ?> on <?php the_time('F j, Y'); ?>
-                        in <?php echo get_the_category_list(', ')?></p>
+                    <p>Posted by <?php the_author_posts_link(); ?> on <?php the_time( 'F j, Y' ); ?>
+                        in <?php echo get_the_category_list( ', ' ) ?></p>
                 </div>
                 <div class="generic-content">
 					<?php the_excerpt(); ?>
-                    <p><a class="btn btn--blue" href="<?php the_permalink();?>" >Continue Reading &raquo;
+                    <p><a class="btn btn--blue" href="<?php the_permalink(); ?>">Continue Reading
+                            &raquo;
                         </a>
                     </p>
                 </div>
@@ -41,7 +33,7 @@ get_header();
 
 			<?php
 		}
-        echo paginate_links();
+		echo paginate_links();
 		?>
     </div>
 <?php
