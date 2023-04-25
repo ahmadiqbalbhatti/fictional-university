@@ -1,4 +1,6 @@
 <?php
+require_once get_template_directory().'/includes/search-route.php';
+
 
 function university_custom_rest(): void {
 	register_rest_field( 'post', 'authorName', array(

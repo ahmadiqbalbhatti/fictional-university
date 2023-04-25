@@ -9,21 +9,21 @@ while ( have_posts() ) {
 	?>
 
 
-    <div class="container container--narrow page-section">
-        <div class="metabox metabox--position-up metabox--with-home-link">
-            <p>
-                <a class="metabox__blog-home-link"
-                   href="<?php echo get_post_type_archive_link( 'program' ) ?>">
-                    <i class="fa fa-home" aria-hidden="true"></i>
-                    All Programs
-                </a>
-                <span class="metabox__main"> <?php the_title() ?></span>
-            </p>
-        </div>
-        <div class="generic-content">
+	<div class="container container--narrow page-section">
+		<div class="metabox metabox--position-up metabox--with-home-link">
+			<p>
+				<a class="metabox__blog-home-link"
+				   href="<?php echo get_post_type_archive_link( 'program' ) ?>">
+					<i class="fa fa-home" aria-hidden="true"></i>
+					All Programs
+				</a>
+				<span class="metabox__main"> <?php the_title() ?></span>
+			</p>
+		</div>
+		<div class="generic-content">
 			<?php
-			the_content();
-
+			$mainBodyContent = get_post_meta( get_the_ID(), 'main_body_content', true );
+			echo $mainBodyContent;
 			$relatedProfessors = new WP_Query( array(
 				'posts_per_page' => 2,
 				'post_type'      => 'professor',
@@ -46,13 +46,13 @@ while ( have_posts() ) {
 				while ( $relatedProfessors->have_posts() ) {
 					$relatedProfessors->the_post();
 					?>
-                    <li class="professor-card__list-item">
-                        <a class="professor-card" href="<?php the_permalink(); ?>">
-                            <img src="<?php the_post_thumbnail_url( 'professorLandscape' ); ?>"
-                                 class="professor-card__image"/>
-                            <span class="professor-card__name"><?php the_title(); ?></span>
-                        </a>
-                    </li>
+					<li class="professor-card__list-item">
+						<a class="professor-card" href="<?php the_permalink(); ?>">
+							<img src="<?php the_post_thumbnail_url( 'professorLandscape' ); ?>"
+							     class="professor-card__image"/>
+							<span class="professor-card__name"><?php the_title(); ?></span>
+						</a>
+					</li>
 					<?php
 				}
 				echo '</ul>';
@@ -98,21 +98,28 @@ while ( have_posts() ) {
 			$relatedCampuses = get_field( 'related_campus' );
 			if ( $relatedCampuses ) {
 				echo '<hr class="section-break">';
+
+				echo '<h3 class="headline headline--medium">' . get_the_title() . ' is Available at These Campus(es): </h3>';
+				echo "<ul class='min-list link-list'>";
+//				echo $relatedCampuses;
+
+				foreach ( $relatedCampuses as $related_campus ) {
+					?>
+					<li>
+						<a href="<?php echo get_the_permalink( $related_campus ); ?>"><?php echo get_the_title
+							( $related_campus ); ?></a>
+					</li>
+					<?php
+				}
+				echo "</ul>";
+			} else{
+				echo '<h3 class="headline headline--medium" style="color: orangered">' . get_the_title()
+				     . ' is not Available at any Campus. </h3>';
+
 			}
-			echo '<h3 class="headline headline--medium">' . get_the_title() . ' is Available at These Campus(es): </h3>';
-                echo "<ul class='min-list link-list'>";
-            foreach ( $relatedCampuses as $related_campus ) {
-	            ?>
-                <li >
-                    <a href="<?php echo get_the_permalink( $related_campus ); ?>"><?php echo get_the_title
-			            ( $related_campus ); ?></a>
-                </li>
-	            <?php
-            }
-            echo "</ul>";
 			?>
-        </div>
-    </div>
+		</div>
+	</div>
 	<?php
 }
 get_footer();
