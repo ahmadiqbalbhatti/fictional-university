@@ -7,3 +7,9 @@ Author URI: https://ahmadiqbalbahtti.com
 Version: 1.0.0
 Text Domain: fictional-university
 */
+
+
+*{
+    margin: 0;
+    padding: 0;
+}
